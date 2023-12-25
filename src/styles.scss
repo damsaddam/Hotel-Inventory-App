@@ -1,1 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"); /* Use CDN Link */
+.add button, .edit button, .delete button{
+    font-size: 15px;
+}
+
+.available-rooms, .comments {
+    font-size: 15px;
+    text-align: center;
+}
+
+.available-rooms h4 {
+    text-align: start;
+}
+
+table th i {
+    font-size: 19px;
+}
+
+mat-snack-bar-container * {
+    background: black !important;
+    color: rgb(0, 255, 255) !important;
+}
+
+div.mat-mdc-snack-bar-label.mdc-snackbar__label {
+    background: black !important;
+    color: rgb(0, 255, 255) !important;
+}
+
+html, body { height: 100%; }

@@ -1,0 +1,366 @@
+<!-- Render the Reactive Forms -->
+
+<!-- {{ bookingForm.value | json }}
+{{ bookingForm.pristine | json }}
+{{ bookingForm.dirty | json }}
+{{ bookingForm.invalid | json }}
+{{ bookingForm.valid | json }} -->
+
+<div class="container-fluid">
+  <h1>Welcome to Saddam Hotel</h1>
+  <div class="d-flex mb-3 mt-2">
+    <button
+      type="button"
+      class="btn btn-outline-info ps-4 pe-4"
+      (click)="addPassport()"
+    >
+      Add Passport
+    </button>
+  </div>
+
+  <div class="mb-3">
+    <button
+      type="button"
+      class="btn btn-outline-danger ps-4 pe-4"
+      (click)="deletePassport()"
+    >
+      Delete Passport
+    </button>
+  </div>
+
+  <form class="form" [formGroup]="bookingForm" (ngSubmit)="addBooking()">
+    <mat-form-field
+      class="full-width"
+      appearance="outline"
+      *ngIf="bookingForm.get('passport')"
+    >
+      <mat-label>Passport</mat-label>
+      <input
+        type="text"
+        matInput
+        placeholder="Type your passport Number"
+        formControlName="passport"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Room Number</mat-label>
+      <input type="text" matInput formControlName="roomNumber" autofocus />
+      <mat-error
+        class="text-center"
+        *ngIf="bookingForm.get('roomNumber')?.hasError('required')"
+      >
+        <strong>Please enter the room number that you will booking</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Guest Name</mat-label>
+      <input
+        type="text"
+        matInput
+        placeholder="Type your name"
+        formControlName="guestName"
+      />
+      {{ bookingForm.get("guestName")?.errors | json }}
+      <mat-error
+        class="text-center"
+        *ngIf="bookingForm.get('guestName')?.hasError('minlength')"
+      >
+        <strong>Sorry. The name must be at least 3 characters</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Email</mat-label>
+      <input
+        type="email"
+        matInput
+        placeholder="someone@gmail.com"
+        formControlName="guestEmail"
+      />
+      <mat-error
+        class="text-center"
+        *ngIf="bookingForm.get('guestEmail')?.hasError('email')"
+      >
+        <strong>
+          Please enter a valid email address. Example: someone@gmail.com
+        </strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Contact Number</mat-label>
+      <input
+        type="text"
+        matInput
+        placeholder="Type your contact number"
+        formControlName="mobileNumber"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="full-width mb-1" appearance="outline">
+      <mat-label>Booking Amount</mat-label>
+      <input
+        type="text"
+        matInput
+        placeholder="Booking Amount"
+        formControlName="bookingAmount"
+      />
+      <mat-error
+        class="text-center"
+        *ngIf="bookingForm.get('bookingAmount')?.hasError('required')"
+      >
+        <strong>Please enter the room that you will be booking</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width mb-3" appearance="outline">
+      <mat-label>Silahkan pilih tanggal check-in</mat-label>
+      <input matInput [matDatepicker]="picker1" formControlName="checkinDate" />
+      <mat-hint>Bulan/Tanggal/Tahun</mat-hint>
+      <mat-error
+        class="text-center"
+        *ngIf="bookingForm.get('checkinDate')?.hasError('required')"
+      >
+        <strong
+          >Please choose the check-in date. Click a calendar icon on the
+          right</strong
+        >
+      </mat-error>
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker1"
+      ></mat-datepicker-toggle>
+      <mat-datepicker touchUi #picker1></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="full-width mb-3" appearance="outline">
+      <mat-label>Silahkan pilih tanggal check-out</mat-label>
+      <input
+        matInput
+        [matDatepicker]="picker2"
+        formControlName="checkoutDate"
+      />
+      <mat-hint>Bulan/Tanggal/Tahun</mat-hint>
+      <mat-error
+        class="text-center"
+        *ngIf="bookingForm.get('checkoutDate')?.hasError('required')"
+      >
+        <strong
+          >Please choose the check-out date. Click a calendar icon on the
+          right</strong
+        >
+      </mat-error>
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker2"
+      ></mat-datepicker-toggle>
+      <mat-datepicker touchUi #picker2></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="full-width mb-3" appearance="outline">
+      <mat-label>Silahkan pilih tanggal booking kamar</mat-label>
+      <input matInput [matDatepicker]="picker3" formControlName="bookingDate" />
+      <mat-hint>Bulan/Tanggal/Tahun</mat-hint>
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker3"
+      ></mat-datepicker-toggle>
+      <mat-datepicker touchUi #picker3></mat-datepicker>
+    </mat-form-field>
+
+    <div formGroupName="guestAddress" class="mb-3">
+      <mat-accordion class="example-headers-align">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title> Address </mat-panel-title>
+            <mat-panel-description>
+              Type your address below
+              <i class="bi bi-house-down-fill"></i>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <mat-form-field class="full-width mb-1" appearance="outline">
+            <mat-label>Address</mat-label>
+            <input
+              type="text"
+              matInput
+              placeholder="Type your address based on KTP (Resident Identity Card)"
+              formControlName="address"
+            />
+            <mat-error
+              class="text-center"
+              *ngIf="
+                bookingForm.get('guestAddress.address')?.hasError('required')
+              "
+            >
+              <strong
+                >Please enter your address based on KTP (Resident Identity
+                Card)</strong
+              >
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="full-width mb-1" appearance="outline">
+            <mat-label>City</mat-label>
+            <input
+              type="text"
+              matInput
+              placeholder="Type your city based on KTP (Resident Identity Card)"
+              formControlName="city"
+            />
+            <mat-error
+              class="text-center"
+              *ngIf="bookingForm.get('guestAddress.city')?.hasError('required')"
+            >
+              <strong
+                >Please enter your city based on KTP (Resident Identity
+                Card)</strong
+              >
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="full-width mb-1" appearance="outline">
+            <mat-label>Province/State</mat-label>
+            <input
+              type="text"
+              matInput
+              placeholder="Type your province/state based on KTP (Resident Identity Card)"
+              formControlName="province"
+            />
+            <mat-error
+              class="text-center"
+              *ngIf="
+                bookingForm.get('guestAddress.province')?.hasError('required')
+              "
+            >
+              <strong
+                >Please enter your province/state based on KTP (Resident
+                Identity Card)</strong
+              >
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="full-width mb-1" appearance="outline">
+            <mat-label>Country</mat-label>
+            <input
+              type="text"
+              matInput
+              placeholder="Type your country based on KTP (Resident Identity Card)"
+              formControlName="country"
+            />
+            <mat-error
+              class="text-center"
+              *ngIf="
+                bookingForm.get('guestAddress.country')?.hasError('required')
+              "
+            >
+              <strong
+                >Please enter your country based on KTP (Resident Identity
+                Card)</strong
+              >
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="full-width mb-1" appearance="outline">
+            <mat-label>ZIP Code</mat-label>
+            <input
+              type="text"
+              matInput
+              placeholder="Type the ZIP code"
+              formControlName="zipCode"
+            />
+            <mat-error
+              class="text-center"
+              *ngIf="
+                bookingForm.get('guestAddress.zipCode')?.hasError('required')
+              "
+            >
+              <strong>Please enter the ZIP code</strong>
+            </mat-error>
+          </mat-form-field>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+
+    <div class="mb-1">
+      <button
+        type="button"
+        class="btn btn-outline-info ps-4 pe-4"
+        (click)="addGuests()"
+      >
+        Add Guests
+      </button>
+    </div>
+
+    <div formArrayName="guests" class="mb-3">
+      <mat-accordion class="example-headers-align">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title> Guests Name </mat-panel-title>
+            <mat-panel-description>
+              Add your roommate/the person in another room that you have booked
+              (if there)
+              <i class="bi bi-person-fill-add"></i>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <div *ngFor="let guest of guests.controls; let i = index">
+            <div [formGroupName]="i">
+              <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Guests Name</mat-label>
+                <input
+                  type="text"
+                  matInput
+                  placeholder="Guests Name"
+                  formControlName="guestsName"
+                />
+                <!-- <mat-error
+                class="text-center"
+                *ngIf="
+                  bookingForm
+                    .get(['guests', i, 'guestsName'])                 /* If you wanna add the validators */
+                    ?.hasError('required')
+                "
+              >
+                <strong>Please enter the guests name</strong>
+              </mat-error> -->
+              </mat-form-field>
+
+              <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Age</mat-label>
+                <input
+                  type="text"
+                  matInput
+                  placeholder="Age"
+                  formControlName="age"
+                />
+              </mat-form-field>
+            </div>
+
+            <div class="mb-3">
+              <button
+                type="button"
+                class="btn btn-outline-danger ps-4 pe-4"
+                (click)="removeGuests(i)"
+              >
+                Remove Guests
+              </button>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+
+    <div>
+      <button
+        [disabled]="bookingForm.invalid"
+        type="submit"
+        class="btn btn-success ps-4 pe-4"
+      >
+        Booking Room
+      </button>
+    </div>
+  </form>
+</div>

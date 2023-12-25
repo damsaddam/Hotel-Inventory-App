@@ -1,0 +1,48 @@
+<!-- The dumb component to render (showing the results) -->
+<div class="table-responsive">
+  <table class="table table-dark table-striped">
+    <thead>
+      <tr>
+        <th>Room Number</th>
+        <th>Room Type</th>
+        <th>Amenities</th>
+        <th>Price</th>
+        <th>Check In</th>
+        <th>Check Out</th>
+        <th><i class="bi bi-star-fill"></i></th>
+        <th><i class="bi bi-building-add"></i></th>
+      </tr>
+    </thead>
+    <tbody class="table-group-divider">
+      <!-- [ngClass] is adjust to scss file. 'odd' and 'even' is class on rooms.component.scss -->
+      <tr *ngFor="let rooms of list | filter : price">
+        <td>{{ rooms.roomNumber }}</td>
+        <td>{{ rooms.roomType }}</td>
+        <td>{{ rooms.amenities | titlecase }}</td>
+        <td>{{ rooms.price | currency : "Rp." : "symbol" : "3.0" }}</td>
+        <!-- Indonesian CurrencyPipe-->
+        <!-- DatePipe -->
+        <td>{{ rooms.checkinTime | date : "d MMMM y 'at' hh:mm a" }}</td>
+        <td>{{ rooms.checkoutTime | date : "d MMMM y 'at' hh:mm a" }}</td>
+        <!-- DecimalPipe -->
+        <td>{{ rooms.rating | number : "1.0-0" }}</td>
+        <td>
+          <!-- <button
+            type="button"
+            class="btn btn-outline-light"
+            (click)="selectRoom(rooms)"
+          >
+            Select
+          </button> -->
+          <button
+            type="button"
+            [routerLink]="['/booking', rooms.roomNumber]"
+            class="btn btn-outline-light"
+          >
+            Booking
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -25,3 +25,23 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Notes
+1. title:string is a property
+
+## The important command
+1. ng g m [name]  --route=[name]  --routing --module=[root name]  => create the components, the module, a routing, and the lazy loading as well
+2. ng g m [name] and then ng g c [name]  in case you wanna add the module to its related components automatically. So you don't have to add declarations in the module manually.
+3. ng g g login --functional=false => create a guard named login (a example is './guards').
+4. ng g s [name] => to create a service
+5. ng g pipe [name] => creating a pipe
+
+## Setting Up Reactive Forms
+1. Import ReactiveFormsModule to the module that you want.
+2. In Import Reactive Forms, create Forms using TypeScript.
+3. Good for Developers who likes to have more control in TS file.
+4. Uses API in Angular Material like FormGroup, FormControl, and FormDirectives.
+
+## Submit and Reset Forms
+1. Use ngSubmit to submit the form
+2. Use reset to reset the form

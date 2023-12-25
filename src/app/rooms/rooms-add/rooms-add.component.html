@@ -1,0 +1,124 @@
+<!-- Use Template Driven Forms -->
+
+<!-- {{ roomsForm.pristine | json }}
+{{ roomsForm.dirty | json }}
+{{ roomsForm.valid | json }}
+{{ roomsForm.invalid | json }}
+{{ roomsForm.value | json }} -->
+
+<div class="container-fluid">
+  <form #roomsForm="ngForm" (ngSubmit)="addRoom(roomsForm)" class="mb-3">
+    <div class="form-group mt-3 mb-1">
+      <input
+        #roomtype="ngModel"
+        [(ngModel)]="rooms.roomType"
+        [ngModelOptions]="{ updateOn: 'blur' }"
+        type="text"
+        class="form-control"
+        name="roomType"
+        placeholder="Room Type"
+        required
+        autofocus
+      />
+      <div
+        class="alert alert-danger row m-0 p-2"
+        *ngIf="roomtype.errors?.['required']"
+      >
+        Please fill this in
+      </div>
+    </div>
+    <div class="form-group mb-1">
+      <input
+        minlength="5"
+        maxlength="100"
+        #roomamenities="ngModel"
+        [(ngModel)]="rooms.amenities"
+        [ngModelOptions]="{ updateOn: 'blur' }"
+        type="text"
+        class="form-control"
+        name="amenities"
+        placeholder="Amenities"
+        required
+      />
+      <div
+        class="alert alert-danger row m-0 p-2"
+        *ngIf="roomamenities.errors?.['minlength']"
+      >
+        Amenities should be a minimum of 5 characters and a maximum of 100
+        characters
+      </div>
+    </div>
+    <div class="form-group mb-1">
+      <input
+        [(ngModel)]="rooms.image"
+        [ngModelOptions]="{ updateOn: 'blur' }"
+        type="file"
+        class="form-control"
+        name="image"
+        placeholder="Image (Provided Link)"
+      />
+    </div>
+    <div class="form-group mb-1">
+      <input
+        [(ngModel)]="rooms.price"
+        [ngModelOptions]="{ updateOn: 'blur' }"
+        type="text"
+        class="form-control"
+        name="price"
+        placeholder="Price Per Night"
+        required
+      />
+    </div>
+    <div class="form-group mb-1">
+      <input
+        [(ngModel)]="rooms.checkinTime"
+        [ngModelOptions]="{ updateOn: 'blur' }"
+        type="datetime"
+        class="form-control"
+        name="checkinTime"
+        placeholder="Check-In Time"
+        required
+      />
+    </div>
+    <div class="form-group mb-1">
+      <input
+        [(ngModel)]="rooms.checkoutTime"
+        [ngModelOptions]="{ updateOn: 'blur' }"
+        type="datetime"
+        class="form-control"
+        name="checkoutTime"
+        placeholder="Check-Out Time"
+        required
+      />
+    </div>
+    <div class="form-group mb-3">
+      <input
+        [(ngModel)]="rooms.rating"
+        [ngModelOptions]="{ updateOn: 'blur' }"
+        type="text"
+        class="form-control"
+        name="rating"
+        placeholder="Rating 1 of 10"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <div class="d-flex justify-content-center">
+        <button
+          [disabled]="roomsForm.invalid"
+          type="submit"
+          class="btn btn-success ps-4 pe-4"
+        >
+          Submit
+        </button>
+      </div>
+    </div>
+  </form>
+  <div
+    *ngIf="successMessage !== ''"
+    class="row alert alert-success"
+    role="alert"
+  >
+    {{ successMessage }}
+  </div>
+</div>

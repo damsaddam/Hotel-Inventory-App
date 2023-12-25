@@ -1,0 +1,52 @@
+<!-- The smart component that knows from where to get the data -->
+
+<!-- (click) is event binding -->
+<div class="wrap d-flex flex-column ms-1 mb-0">
+  <!-- Interpolation -->
+  <h1>Welcome to {{ hotelName }}</h1>
+  <div class="add mb-1">
+    <button type="button" class="btn btn-primary" routerLink="add">
+      Add Room
+    </button>
+  </div>
+  <div class="edit mb-1">
+    <button type="button" class="btn btn-secondary" (click)="editRoom()">
+      Edit Room
+    </button>
+  </div>
+  <div class="delete mb-1">
+    <button type="button" class="btn btn-danger" (click)="deleteRoom()">
+      Delete Room
+    </button>
+  </div>
+  <div class="ms-1">
+    <!-- The async pipe subscribes to an Observable or Promise. It means returns the latest value it has emitted -->
+    <h4>{{ getErrors$ | async }}</h4>
+    <h4 class="mb-0">The available rooms is: {{ roomsCounts$ | async }}</h4>
+  </div>
+</div>
+
+<div class="price m-1">
+  <input
+    type="number"
+    class="form-control"
+    placeholder="Price Filter"
+    [formControl]="priceFilter"
+  />
+</div>
+
+<!-- [hidden] or [innerText] is property binding -->
+<div class="available-rooms" *ngIf="rooms$ | async as rooms">
+  <router-outlet></router-outlet>
+  <hiapp-rooms-list
+    [list]="rooms"
+    [price]="priceFilter.value"
+    (selectedRoom)="selectRoom($event)"
+  ></hiapp-rooms-list>
+  <!-- <div class="p-0 m-0">
+    <h4>{{ totalBytes }} loaded</h4>
+  </div> -->
+  <!-- <div *ngIf="selectedRoom">
+    {{ selectedRoom | json }}
+  </div> -->
+</div>

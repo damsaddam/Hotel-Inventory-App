@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Afacad:wght@600&display=swap');
+h1 {
+    font-family: 'Afacad', sans-serif;
+    text-align: center;
+    font-size: 26px;
+}
+
+.form {
+    min-width: 150px;
+    max-width: 600px;
+    width: 100%;
+}
+  
+.full-width {
+    width: 100%;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+    justify-content: space-between;
+    align-items: center;
+}
+
+.example-headers-align i {
+    font-size: 20px;
+}
