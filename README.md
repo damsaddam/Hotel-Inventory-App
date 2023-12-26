@@ -26,9 +26,6 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
 
-## Notes
-1. title:string is a property
-
 ## The important command
 1. ng g m [name]  --route=[name]  --routing --module=[root name]  => create the components, the module, a routing, and the lazy loading as well
 2. ng g m [name] and then ng g c [name]  in case you wanna add the module to its related components automatically. So you don't have to add declarations in the module manually.
