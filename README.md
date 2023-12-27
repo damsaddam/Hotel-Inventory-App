@@ -27,8 +27,7 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
 
 ## Notes
-1. title:string is a property.
-2. Stop the server: ctrl + c.
+1. Stop the server: ctrl + c.
 
 ## The important command
 1. ng g m [name]  --route=[name]  --routing --module=[root name]  => create the components, the module, a routing, and the lazy loading as well
