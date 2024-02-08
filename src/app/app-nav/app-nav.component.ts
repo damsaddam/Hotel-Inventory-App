@@ -5,7 +5,7 @@ import { map, shareReplay } from 'rxjs/operators';
 import { AsyncPipe, NgIf } from '@angular/common';
 
 @Component({
-  selector: 'hiapp-app-nav',
+  selector: 'hiapp-nav',
   templateUrl: './app-nav.component.html',
   styleUrls: ['./app-nav.component.scss']
 })

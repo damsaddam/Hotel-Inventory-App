@@ -23,7 +23,12 @@ export class BookingComponent implements OnInit {
   get guests() {
     return this.bookingForm.get('guests') as FormArray;
   }
-  constructor(private configService: ConfigService, private fb: FormBuilder, private bookingService: BookingService, private router: ActivatedRoute) { }
+  constructor(
+    private configService: ConfigService,
+    private fb: FormBuilder,
+    private bookingService: BookingService,
+    private router: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
     const roomNumber = this.router.snapshot.paramMap.get('roomnumber');
@@ -31,98 +36,116 @@ export class BookingComponent implements OnInit {
       /* new FormControl('') and [''] are the same thing namely creating a form control. */
       roomNumber: new FormControl(
         { value: roomNumber, disabled: true },
-        { validators: [Validators.required] },
+        { validators: [Validators.required] }
       ),
       guestEmail: [
         '',
         {
           updateOn: 'blur',
           validators: [Validators.required, Validators.email],
-        }],
+        },
+      ],
       checkinDate: [
         '',
         {
           updateOn: 'blur',
-          validators: [Validators.required]
-        }],
+          validators: [Validators.required],
+        },
+      ],
       checkoutDate: [
         '',
         {
           updateOn: 'blur',
-          validators: [Validators.required]
-        }],
+          validators: [Validators.required],
+        },
+      ],
       bookingStatus: [
         '',
         {
           updateOn: 'blur',
-        }],
+        },
+      ],
       bookingAmount: [
         '',
         {
           updateOn: 'blur',
-          validators: [Validators.required]
-        }],
+          validators: [Validators.required],
+        },
+      ],
       bookingDate: [
         '',
         {
           updateOn: 'blur',
-        }],
+        },
+      ],
       mobileNumber: [
         '',
         {
           updateOn: 'blur',
-        }],
+        },
+      ],
       guestName: [
         '',
         {
           updateOn: 'blur',
-          validators: [Validators.required, Validators.minLength(3), CustomValidator.ValidateName, CustomValidator.ValidateSpecialChar('*'), CustomValidator.ValidateSpecialChar('!')]
-        }],
+          validators: [
+            Validators.required,
+            Validators.minLength(3),
+            CustomValidator.ValidateName,
+            CustomValidator.ValidateSpecialChar('*'),
+            CustomValidator.ValidateSpecialChar('!'),
+          ],
+        },
+      ],
       guestAddress: this.fb.group({
         address: [
           '',
           {
             updateOn: 'blur',
-            validators: [Validators.required]
-          }],
+            validators: [Validators.required],
+          },
+        ],
         city: [
           '',
           {
             updateOn: 'blur',
-            validators: [Validators.required]
-          }],
+            validators: [Validators.required],
+          },
+        ],
         province: [
           '',
           {
             updateOn: 'blur',
-            validators: [Validators.required]
-          }],
+            validators: [Validators.required],
+          },
+        ],
         country: [
           '',
           {
             updateOn: 'blur',
-            validators: [Validators.required]
-          }],
+            validators: [Validators.required],
+          },
+        ],
         zipCode: [
           '',
           {
             updateOn: 'blur',
-            validators: [Validators.required]
-          }],
+            validators: [Validators.required],
+          },
+        ],
       }),
       guests: this.fb.array([
         this.fb.group({
-          guestsName: new FormControl(
-            '',
-            {
-              updateOn: 'blur',
-            }),
+          guestsName: new FormControl('', {
+            updateOn: 'blur',
+          }),
           // guestsName: new FormControl('', { validators: [Validators.required] }),  /* If you wanna add the validators */
           age: [
             '',
             {
               updateOn: 'blur',
-            }],
+            },
+          ],
         }),
       ]),
     });
@@ -133,12 +156,14 @@ export class BookingComponent implements OnInit {
     //   this.bookingService.bookRoom(data).subscribe((data) => { })
     // });
 
-    this.bookingForm.valueChanges.pipe(
-      /* mergeMap doesn't care about the sequence. It subscribes to the data as soon as the data is provided. The sequence doesn't matter. */
-      /* switchMap will cancel any existing request if it receives new data. In case you care about whoever has subscribed to your stream, should get the latest data only and the previous data that is raised should be canceled */
-      /* exhaustMap care about the sequence. It is useful in case the previous request/data that you made must completed before it can make a new request. */
-      exhaustMap((data) => this.bookingService.bookRoom(data)))
-      .subscribe((data) => console.log(data))
+    this.bookingForm.valueChanges
+      .pipe(
+        /* mergeMap doesn't care about the sequence. It subscribes to the data as soon as the data is provided. The sequence doesn't matter. */
+        /* switchMap will cancel any existing request if it receives new data. In case you care about whoever has subscribed to your stream, should get the latest data only and the previous data that is raised should be canceled */
+        /* exhaustMap care about the sequence. It is useful in case the previous request/data that you made must completed before it can make a new request. */
+        exhaustMap((data) => this.bookingService.bookRoom(data))
+      )
+      .subscribe((data) => console.log(data));
   }
 
   addBooking() {
@@ -173,18 +198,17 @@ export class BookingComponent implements OnInit {
   addGuests() {
     this.guests.push(
       this.fb.group({
-        guestsName: new FormControl(
-          '',
-          {
-            updateOn: 'blur',
-          }),
+        guestsName: new FormControl('', {
+          updateOn: 'blur',
+        }),
         // guestsName: new FormControl('', { validators: [Validators.required] }),  /* If you wanna add the validators */
         age: [
           '',
           {
             updateOn: 'blur',
-          }],
-      }),
+          },
+        ],
+      })
     );
   }
 
