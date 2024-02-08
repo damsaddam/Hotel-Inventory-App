@@ -36,7 +36,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 4. ng g s [name] => to create a service
 5. ng g pipe [name] => creating a pipe
 
-## Setting Up Reactive Forms
+## Set Up Reactive Forms
 1. Import ReactiveFormsModule to the module that you want.
 2. In Import Reactive Forms, create Forms using TypeScript.
 3. Good for Developers who likes to have more control in TS file.
